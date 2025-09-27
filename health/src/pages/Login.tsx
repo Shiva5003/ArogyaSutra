@@ -10,18 +10,29 @@ const Login: React.FC = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const savedUser = localStorage.getItem("user");
-    if (!savedUser) {
-      alert("No user found! Please register first.");
-      return;
-    }
-    const { username, password } = JSON.parse(savedUser);
-    if (form.username === username && form.password === password) {
-      navigate("/questionnaire");
-    } else {
-      alert("Invalid credentials!");
+    try {
+      const response = await fetch("http://127.0.0.1:8080/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password,
+        }),
+      });
+
+      if (response.ok) {
+        // Login successful
+        navigate("/questionnaire");
+      } else {
+        const data = await response.json();
+        alert(data.message || "Login failed!");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
     }
   };
 
