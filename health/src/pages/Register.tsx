@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -12,33 +16,27 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const savedUser = localStorage.getItem("user");
-    if (!savedUser) {
-      alert("No user found! Please register first.");
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match!");
       return;
     }
-    const { username, password } = JSON.parse(savedUser);
-    if (form.username === username && form.password === password) {
-      navigate("/questionnaire");
-    } else {
-      alert("Invalid credentials!");
-    }
+    
+    // localStorage.setItem("user", JSON.stringify({ username: form.username, password: form.password }));
+    // alert("Registration successful! Please login.");
+    navigate("/questionnaire");
   };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4 shadow " style={{ width: "350px" }}>
-        
-        <div className="text-center mb-3">
+      <div className="card p-4 shadow " style={{width:'350px'}}>
+         <div className="text-center mb-3">
           <img
             src="https://media.licdn.com/dms/image/v2/C510BAQGSvw_fNAPlfg/company-logo_200_200/company-logo_200_200/0/1630626157736/uzwow_logo?e=2147483647&v=beta&t=ZsqOcy-QxgQiVV7XW7JrF_2EdA_a2EGlSvx86RyA1Gg"
             alt="Company Logo"
             style={{ width: "80px", height: "80px", borderRadius: "50%" }}
           />
         </div>
-
-        <h3 className="text-center mb-3">Login</h3>
-
+        <h3 className="text-center mb-3">Register</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -58,22 +56,23 @@ const Login: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <button
-            type="submit"
-            className="btn btn-success w-100"
-            style={{ backgroundColor: "#357bbc" }}
-          >
-            Login
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="form-control mb-3"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" className="btn btn-primary w-100" style={{backgroundColor:"#0a1a48"}}>
+            Register
           </button>
         </form>
-
         <p className="text-center mt-3">
-          Don’t have an account?{" "}
-          <span
-            style={{ cursor: "pointer", color: "#04ce4e" }}
-            onClick={() => navigate("/register")}
-          >
-            Register
+          Already have an account?{" "}
+          <span style={{ cursor: "pointer", color: "#b42c5c" }} onClick={() => navigate("/login")}>
+            Login
           </span>
         </p>
       </div>
@@ -81,4 +80,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;

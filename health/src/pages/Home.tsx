@@ -6,7 +6,7 @@ import HealthSuggestions from './tabs/Suggestions';
 
 const Home: React.FC = () => {
   const location = useLocation();
-  const userData = location.state as any; // QuestionnaireData
+  const userData = location.state as any;
   const [tab, setTab] = useState<'score' | 'insurance' | 'suggestions'>('score');
 
   return (

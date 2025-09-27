@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface QuestionnaireData {
-  [key: string]: string; // dynamic fields
+  [key: string]: string; 
 }
 
 const questions: { label: string; name: string; type?: string }[] = [
@@ -38,11 +38,18 @@ const Questionnaire: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    for (const key in formData) {
+      if (!formData[key]) {
+        alert("Please fill all fields before submitting!");
+        return;
+      }
+    }
+
     navigate("/home", { state: formData });
   };
 
   return (
-    <div className="container d-flex justify-content-center mt-5">
+    <div className="container d-flex justify-content-center mt-5 mb-5">
       <div className="card p-4 shadow w-75">
         <h3 className="card-title text-center mb-3">Health Questionnaire</h3>
         {questions.map((q) => (

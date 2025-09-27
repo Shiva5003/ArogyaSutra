@@ -5,7 +5,6 @@ interface InsurancePlansProps {
 }
 
 const InsurancePlans: React.FC<InsurancePlansProps> = ({ userData }) => {
-  // Example: suggest plans based on health data
   return (
     <div>
       <h4>Insurance Plans</h4>

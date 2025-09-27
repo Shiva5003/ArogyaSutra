@@ -5,7 +5,7 @@ interface HealthSuggestionsProps {
 }
 
 const HealthSuggestions: React.FC<HealthSuggestionsProps> = ({ userData }) => {
-  // Example suggestions
+  
   return (
     <div>
       <h4>Health Suggestions</h4>
