@@ -8,12 +8,12 @@ const HealthSuggestions: React.FC<HealthSuggestionsProps> = ({ userData }) => {
   
   return (
     <div>
-      <h4>Health Suggestions</h4>
+      <h4 style={{color:"#a4ce4e"}}>Health Suggestions</h4>
       <ul>
-        <li>Sleep 7-8 hours daily (currently {userData?.avg_sleep_hours_SW} hrs)</li>
-        <li>Exercise 30 mins daily</li>
-        <li>Maintain BMI between 18.5 and 24.9</li>
-        <li>Monitor cholesterol and blood pressure</li>
+        <li style={{color:"#357bbc"}}>Sleep 7-8 hours daily (currently {userData?.avg_sleep_hours_SW} hrs)</li>
+        <li style={{color:"#0090da"}}>Exercise 30 mins daily</li>
+        <li style={{color:"#357bbc"}}>Maintain BMI between 18.5 and 24.9</li>
+        <li style={{color:"#0090da"}}>Monitor cholesterol and blood pressure</li>
       </ul>
     </div>
   );

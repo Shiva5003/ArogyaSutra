@@ -51,10 +51,10 @@ const Questionnaire: React.FC = () => {
   return (
     <div className="container d-flex justify-content-center mt-5 mb-5">
       <div className="card p-4 shadow w-75">
-        <h3 className="card-title text-center mb-3">Health Questionnaire</h3>
+        <h3 className="card-title text-center mb-3" style={{color:"#b42c5c"}}>Health Questionnaire</h3>
         {questions.map((q) => (
           <div key={q.name} className="mb-3">
-            <label className="form-label">{q.label}</label>
+            <label className="form-label" style={{color:"#0a1a48", fontWeight:600}}>{q.label}</label>
             <input
               type={q.type || "text"}
               name={q.name}
@@ -64,7 +64,7 @@ const Questionnaire: React.FC = () => {
             />
           </div>
         ))}
-        <button className="btn btn-success w-100 mt-2" onClick={handleSubmit}>
+        <button className="btn btn-success w-100 mt-2" onClick={handleSubmit} style={{backgroundColor:"#0090da"}}>
           Submit
         </button>
       </div>

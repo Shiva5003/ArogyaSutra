@@ -13,31 +13,44 @@ const Home: React.FC = () => {
     <div className="container mt-5">
       <h2 className="text-center mb-4">Welcome, {userData?.name}</h2>
       <ul className="nav nav-tabs mb-3 justify-content-center">
-        <li className="nav-item">
-          <button
-            className={`nav-link ${tab === 'score' ? 'active' : ''}`}
-            onClick={() => setTab('score')}
-          >
-            Health Score
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link ${tab === 'insurance' ? 'active' : ''}`}
-            onClick={() => setTab('insurance')}
-          >
-            Insurance Plans
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link ${tab === 'suggestions' ? 'active' : ''}`}
-            onClick={() => setTab('suggestions')}
-          >
-            Health Suggestions
-          </button>
-        </li>
-      </ul>
+  <li className="nav-item">
+    <button
+      className="nav-link"
+      style={{
+        color: tab === 'score' ? '#0a1a48' : '#b42c5c',
+        
+      }}
+      onClick={() => setTab('score')}
+    >
+      Health Score
+    </button>
+  </li>
+  <li className="nav-item">
+    <button
+      className="nav-link"
+      style={{
+        color: tab === 'insurance' ? '#0a1a48' : '#b42c5c',
+        
+      }}
+      onClick={() => setTab('insurance')}
+    >
+      Insurance Plans
+    </button>
+  </li>
+  <li className="nav-item">
+    <button
+      className="nav-link"
+      style={{
+        color: tab === 'suggestions' ? '#0a1a48' : '#b42c5c',
+        
+      }}
+      onClick={() => setTab('suggestions')}
+    >
+      Health Suggestions
+    </button>
+  </li>
+</ul>
+
       <div className="card p-4 shadow">
         {tab === 'score' && <HealthScore userData={userData} />}
         {tab === 'insurance' && <InsurancePlans userData={userData} />}
