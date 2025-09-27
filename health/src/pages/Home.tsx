@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { QuestionnaireData } from './Questionnaire';
+import { useLocation } from 'react-router-dom';
+import HealthScore from './tabs/HealthScore';
+import InsurancePlans from './tabs/InsurancePlans';
+import HealthSuggestions from './tabs/Suggestions';
 
-interface HomeProps {
-  userData: QuestionnaireData;
-}
-
-const Home: React.FC<HomeProps> = ({ userData }) => {
+const Home: React.FC = () => {
+  const location = useLocation();
+  const userData = location.state as any; // QuestionnaireData
   const [tab, setTab] = useState<'score' | 'insurance' | 'suggestions'>('score');
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">Welcome, {userData.name}</h2>
+      <h2 className="text-center mb-4">Welcome, {userData?.name}</h2>
       <ul className="nav nav-tabs mb-3 justify-content-center">
         <li className="nav-item">
           <button
@@ -38,9 +39,9 @@ const Home: React.FC<HomeProps> = ({ userData }) => {
         </li>
       </ul>
       <div className="card p-4 shadow">
-        {tab === 'score' && <p>Your Health Score: 78/100 ✅</p>}
-        {tab === 'insurance' && <p>Suggested Plans: Basic Cover, Family Health Plus...</p>}
-        {tab === 'suggestions' && <p>Tip: Sleep 7-8 hrs, Exercise 30 min daily 🚶‍♂️</p>}
+        {tab === 'score' && <HealthScore userData={userData} />}
+        {tab === 'insurance' && <InsurancePlans userData={userData} />}
+        {tab === 'suggestions' && <HealthSuggestions userData={userData} />}
       </div>
     </div>
   );

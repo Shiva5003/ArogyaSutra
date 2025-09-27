@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface LoginProps {
-  onLogin: () => void;
-}
-
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // For demo, any input logs in
+    navigate('/questionnaire');
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
@@ -26,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="btn btn-primary w-100" onClick={onLogin}>
+        <button className="btn btn-primary w-100" onClick={handleLogin}>
           Login
         </button>
       </div>

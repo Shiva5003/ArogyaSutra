@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
-import Questionnaire, { QuestionnaireData } from './pages/Questionnaire';
+import Questionnaire from './pages/Questionnaire';
 import Home from './pages/Home';
 
 const App: React.FC = () => {
-  const [page, setPage] = useState<'login' | 'questionnaire' | 'home'>('login');
-  const [userData, setUserData] = useState<QuestionnaireData | null>(null);
-
   return (
-    <>
-      {page === 'login' && <Login onLogin={() => setPage('questionnaire')} />}
-      {page === 'questionnaire' && (
-        <Questionnaire
-          onComplete={(data) => {
-            setUserData(data);
-            setPage('home');
-          }}
-        />
-      )}
-      {page === 'home' && userData && <Home userData={userData} />}
-    </>
+    <Router>
+      <Routes>
+        {/* Redirect root to /login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
   );
 };
 
