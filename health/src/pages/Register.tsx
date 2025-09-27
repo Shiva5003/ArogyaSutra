@@ -14,16 +14,35 @@ const Register: React.FC = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    
-    // localStorage.setItem("user", JSON.stringify({ username: form.username, password: form.password }));
-    // alert("Registration successful! Please login.");
-    navigate("/questionnaire");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8080/api/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password,
+        }),
+      });
+
+      if (response.ok) {
+        // Registration successful
+        navigate("/questionnaire");
+      } else {
+        const data = await response.json();
+        alert(data.message || "Registration failed!");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
